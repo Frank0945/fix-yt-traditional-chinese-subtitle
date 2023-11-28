@@ -11,8 +11,22 @@
   },
   "content_scripts": [
     {
+      "run_at": "document_start",
       "matches": ["https://www.youtube.com/*", "https://youtube.com/*"],
-      "js": ["js/vendor.js", "js/content_script.js"]
+      "js": ["js/content_script.js"]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["js/injected.js"],
+      "matches": ["https://www.youtube.com/*", "https://youtube.com/*"]
     }
   ]
+
+  // For Firefox settings
+  // "browser_specific_settings": {
+  //   "gecko": {
+  //     "id": "yuanchuang940@gmail.com"
+  //   }
+  // }
 }
