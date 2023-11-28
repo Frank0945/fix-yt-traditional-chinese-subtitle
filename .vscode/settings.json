@@ -15,11 +15,8 @@
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "[postcss]": {
-    "editor.tabSize": 2
-  },
-  "tailwindCSS.includeLanguages": {
-    "typescript": "typescript"
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "editor.quickSuggestions": {
     "strings": true
