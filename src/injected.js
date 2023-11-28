@@ -2,7 +2,18 @@ import * as OpenCC from "opencc-js";
 
 const converter = OpenCC.Converter({ from: "cn", to: "twp" });
 
-const FILTER = "tlang=zh-Hans";
+const FILTER = {
+  /**
+   * Simplified Chinese payload.
+   */
+  HANS: "tlang=zh-Hans",
+
+  /**
+   * Traditional Chinese payload.
+   */
+  HANT: "tlang=zh-Hant",
+};
+const ORIGIN_TLANG = "origin_tlang=zh-Hant";
 
 const XHR = XMLHttpRequest.prototype;
 
@@ -12,6 +23,15 @@ const setRequestHeader = XHR.setRequestHeader;
 
 XHR.open = function () {
   this._requestHeaders = {};
+
+  /**
+   * Convert traditional Chinese subtitles to simplified Chinese,
+   * and append new payload to conducive to the following conversion.
+   */
+  if (arguments[1].indexOf(FILTER.HANT) > -1) {
+    arguments[1] =
+      arguments[1].replace(FILTER.HANT, FILTER.HANS) + "&" + ORIGIN_TLANG;
+  }
 
   return open.apply(this, arguments);
 };
@@ -25,7 +45,8 @@ XHR.send = function () {
   this.addEventListener("load", function () {
     const url = this.responseURL;
 
-    if (url.indexOf(FILTER) > -1) {
+    // Convert simplified Chinese subtitles to traditional Chinese.
+    if (url.indexOf(FILTER.HANS) > -1 && url.indexOf(ORIGIN_TLANG) > -1) {
       const converted = converter(this.responseText);
 
       Object.defineProperty(this, "responseText", {

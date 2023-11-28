@@ -18,19 +18,20 @@ setIntercept();
  */
 window.addEventListener("load", () => {
   const observer = new MutationObserver(() => {
-    console.log("[fix-yt-traditional-chinese-subtitle]: MutationObserver");
-    hideAndAddMenuItems();
-    changeSubtitleReminder();
-    changeMenuReminder();
+    changeMenuItem();
     changeMenuItemAutoTranslate();
+    changeMenuReminder();
   });
-  observer.observe(document.body, {
+  const menu = document.querySelector(".ytp-settings-menu");
+
+  if (!menu) return;
+  observer.observe(menu, {
     subtree: true,
     childList: true,
   });
 });
 
-const hideAndAddMenuItems = () => {
+const changeMenuItem = () => {
   const menu = document.querySelector(".ytp-panel-menu");
 
   if (!menu) return;
@@ -38,24 +39,9 @@ const hideAndAddMenuItems = () => {
   const items = menu.querySelectorAll(".ytp-menuitem");
   items.forEach((item) => {
     const span = item.querySelector(".ytp-menuitem-label")!;
-
     if (span.textContent === "中文（繁體）") {
-      (item as HTMLElement).style.display = "none";
-    }
-    if (span.textContent === "中文（簡體）") {
       span.textContent = "[修復] 中文（繁體）";
     }
-  });
-};
-
-const changeSubtitleReminder = () => {
-  const segments = document.querySelectorAll(".ytp-caption-segment");
-
-  if (!segments) return;
-
-  segments.forEach((segment) => {
-    if (!segment.textContent) return;
-    segment.textContent = replaceReminder(segment.textContent);
   });
 };
 
@@ -81,7 +67,7 @@ const changeMenuItemAutoTranslate = () => {
   });
 };
 
-const reminder = ">> 中文（簡體）";
+const reminder = ">> 中文（繁體）";
 
 const replaceReminder = <T>(str: T) => {
   if (typeof str !== "string") return str;
