@@ -16,17 +16,23 @@ setIntercept();
 /**
  * Modify the text of the website.
  */
+const changeAll = () => {
+  changeMenuItem();
+  changeMenuItemAutoTranslate();
+  changeMenuReminder();
+};
 window.addEventListener("load", () => {
-  const observer = new MutationObserver(() => {
-    changeMenuItem();
-    changeMenuItemAutoTranslate();
-    changeMenuReminder();
-  });
+  const observer = new MutationObserver(changeAll);
   const menu = document.querySelector(".ytp-settings-menu");
+  const panel = document.querySelector(".ytp-panel-menu");
 
   if (!menu) return;
   observer.observe(menu, {
-    subtree: true,
+    childList: true,
+  });
+
+  if (!panel) return;
+  observer.observe(panel, {
     childList: true,
   });
 });
