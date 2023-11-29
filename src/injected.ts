@@ -22,6 +22,7 @@ const send = XHR.send;
 const setRequestHeader = XHR.setRequestHeader;
 
 XHR.open = function () {
+  // @ts-ignore
   this._requestHeaders = {};
 
   /**
@@ -33,12 +34,13 @@ XHR.open = function () {
       arguments[1].replace(FILTER.HANT, FILTER.HANS) + "&" + ORIGIN_TLANG;
   }
 
-  return open.apply(this, arguments);
+  return open.apply(this, arguments as any);
 };
 
 XHR.setRequestHeader = function (header, value) {
+  // @ts-ignore
   this._requestHeaders[header] = value;
-  return setRequestHeader.apply(this, arguments);
+  return setRequestHeader.apply(this, arguments as any);
 };
 
 XHR.send = function () {
@@ -64,5 +66,5 @@ XHR.send = function () {
    * Since the request is wrapped and send out on this line,
    * if any error occurs, it will be thrown here.
    */
-  return send.apply(this, arguments);
+  return send.apply(this, arguments as any);
 };
