@@ -21,16 +21,23 @@ const changeAll = () => {
   changeMenuItemAutoTranslate();
   changeMenuReminder();
 };
-window.addEventListener("load", () => {
-  const observer = new MutationObserver(changeAll);
+const addObserver = () => {
   const menu = document.querySelector(".ytp-settings-menu");
 
-  if (!menu) return;
+  if (!menu) {
+    // Check again after 100ms until the menu is in the DOM.
+    setTimeout(addObserver, 100);
+    return;
+  }
+
+  const observer = new MutationObserver(changeAll);
+
   observer.observe(menu, {
     childList: true,
     attributeFilter: ["style"],
   });
-});
+};
+window.onload = addObserver;
 
 const changeMenuItem = () => {
   const menu = document.querySelector(".ytp-panel-menu");
@@ -63,7 +70,6 @@ const changeMenuItemAutoTranslate = () => {
   const items = menu.querySelectorAll(".ytp-menuitem")!;
   items.forEach((item) => {
     const span = item.querySelector(".ytp-menuitem-label")!;
-
     span.textContent = replaceReminder(span.textContent);
   });
 };
