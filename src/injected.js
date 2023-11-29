@@ -59,5 +59,10 @@ XHR.send = function () {
       );
     }
   });
+
+  /**
+   * Since the request is wrapped and send out on this line,
+   * if any error occurs, it will be thrown here.
+   */
   return send.apply(this, arguments);
 };
