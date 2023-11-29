@@ -1,5 +1,5 @@
 /**
- * Injects the response interception function into the page.
+ * Injects the interception function into the website.
  */
 const setIntercept = () => {
   const s = document.createElement("script");
@@ -24,16 +24,11 @@ const changeAll = () => {
 window.addEventListener("load", () => {
   const observer = new MutationObserver(changeAll);
   const menu = document.querySelector(".ytp-settings-menu");
-  const panel = document.querySelector(".ytp-panel-menu");
 
   if (!menu) return;
   observer.observe(menu, {
     childList: true,
-  });
-
-  if (!panel) return;
-  observer.observe(panel, {
-    childList: true,
+    attributeFilter: ["style"],
   });
 });
 
