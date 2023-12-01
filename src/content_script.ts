@@ -21,7 +21,7 @@ setIntercept();
  * Modify website button labels.
  */
 const addObserver = () => {
-  const menu = document.querySelector(".ytp-settings-menu");
+  const menu = document.querySelector("#movie_player .ytp-settings-menu");
 
   if (!menu) {
     // Check again after 100ms until the menu is in the DOM.
