@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Youtube 繁體自動翻譯修正",
-  "description": "修正Youtube 繁體中文自動翻譯無法正確顯示的錯誤。",
-  "version": "1.0.3",
+  "name": "YouTube 繁體自動翻譯修正",
+  "description": "修正YouTube 繁體中文自動翻譯無法正確顯示的錯誤。",
+  "version": "1.0.5",
   "icons": {
     "128": "128.png"
   },
