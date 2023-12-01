@@ -29,7 +29,7 @@ const addObserver = () => {
     return;
   }
 
-  const observer = new MutationObserver(changeText);
+  const observer = new MutationObserver(() => changeText(menu));
 
   observer.observe(menu, {
     childList: true,
@@ -39,10 +39,7 @@ const addObserver = () => {
 
 window.onload = addObserver;
 
-const changeText = () => {
-  const menu = document.querySelector(".ytp-settings-menu");
-  if (!menu) return;
-
+const changeText = (menu: Element) => {
   const items = menu.querySelectorAll(".ytp-menuitem");
 
   Array.from(items).some((item) => {
