@@ -1,5 +1,9 @@
+const FIXED_TRADITIONAL = "[修復] 中文（繁體）";
+const TRADITIONAL = "中文（繁體）";
+const TO = ">> ";
+
 /**
- * Injects the interception function into the website.
+ * Inject interception function into the website.
  */
 const setIntercept = () => {
   const s = document.createElement("script");
@@ -14,13 +18,8 @@ const setIntercept = () => {
 setIntercept();
 
 /**
- * Modify the text of the website.
+ * Modify website button labels.
  */
-const changeAll = () => {
-  changeMenuItem();
-  changeMenuItemAutoTranslate();
-  changeMenuReminder();
-};
 const addObserver = () => {
   const menu = document.querySelector(".ytp-settings-menu");
 
@@ -30,59 +29,55 @@ const addObserver = () => {
     return;
   }
 
-  const observer = new MutationObserver(changeAll);
+  const observer = new MutationObserver(changeText);
 
   observer.observe(menu, {
     childList: true,
     attributeFilter: ["style"],
   });
 };
+
 window.onload = addObserver;
 
-const changeMenuItem = () => {
-  const menu = document.querySelector(".ytp-panel-menu");
-
+const changeText = () => {
+  const menu = document.querySelector(".ytp-settings-menu");
   if (!menu) return;
 
   const items = menu.querySelectorAll(".ytp-menuitem");
-  items.forEach((item) => {
-    const span = item.querySelector(".ytp-menuitem-label")!;
-    if (span.textContent === "中文（繁體）") {
-      span.textContent = "[修復] 中文（繁體）";
+
+  Array.from(items).some((item) => {
+    const elements = [
+      item.querySelector(".ytp-menuitem-content"),
+      item.querySelector(".ytp-menuitem-label"),
+    ];
+
+    for (const element of elements) {
+      if (!element) continue;
+
+      if (isModified(element.textContent)) return true;
+
+      if (isCanBeModified(element.textContent)) {
+        element.textContent = addTag(element.textContent);
+        return true;
+      }
     }
   });
 };
 
-const changeMenuReminder = () => {
-  const contents = document.querySelectorAll(".ytp-menuitem-content");
-  if (!contents) return;
-
-  contents.forEach((content) => {
-    content.textContent = replaceReminder(content.textContent);
-  });
+const isModified = (text: string | null) => {
+  if (text === null) return false;
+  return text === FIXED_TRADITIONAL || text.includes(TO + FIXED_TRADITIONAL);
 };
 
-const changeMenuItemAutoTranslate = () => {
-  const menu = document.querySelector(".ytp-panel-menu");
-
-  if (!menu) return;
-
-  const items = menu.querySelectorAll(".ytp-menuitem")!;
-  items.forEach((item) => {
-    const span = item.querySelector(".ytp-menuitem-label")!;
-    span.textContent = replaceReminder(span.textContent);
-  });
+const isCanBeModified = (text: string | null) => {
+  if (text === null) return false;
+  return text === TRADITIONAL || text.includes(TO + TRADITIONAL);
 };
 
-const reminder = ">> 中文（繁體）";
-
-const replaceReminder = <T>(str: T) => {
-  if (typeof str !== "string") return str;
-
-  if (str.includes(reminder)) {
-    return str.replace(reminder, ">> [修復] 中文（繁體）");
-  }
-  return str;
+const addTag = (text: string | null) => {
+  if (text === null) return null;
+  if (text === TRADITIONAL) return FIXED_TRADITIONAL;
+  return text.replace(TO + TRADITIONAL, TO + FIXED_TRADITIONAL);
 };
 
 console.log("[fix-yt-traditional-chinese-subtitle]: Loaded successfully");
