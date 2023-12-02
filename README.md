@@ -2,7 +2,7 @@
 
 Corrected the issue that prevented the proper display of YouTube's automatic translation in Traditional Chinese.
 
-The options in the subtitles menu will be modified to "[Fix] Chinese (Traditional)" when your YouTube language is set to Chinese (Traditional). However, the modification will still take effect without the "[Fix]" tag.
+The options in the subtitles menu will be modified to "Fixed Chinese (Traditional)" when your YouTube language is set to Chinese (Traditional). However, the modification will still take effect without the "Fixed" tag.
 
 ## What did I do?
 
