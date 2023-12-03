@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "YouTube 繁體自動翻譯修正",
   "description": "修正YouTube 繁體中文自動翻譯無法正確顯示的錯誤。",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "icons": {
     "128": "128.png"
   },
@@ -12,14 +12,14 @@
   "content_scripts": [
     {
       "run_at": "document_start",
-      "matches": ["https://www.youtube.com/*", "https://youtube.com/*"],
+      "matches": ["*://www.youtube.com/*", "*://youtube.com/*"],
       "js": ["js/content_script.js"]
     }
   ],
   "web_accessible_resources": [
     {
       "resources": ["js/injected.js"],
-      "matches": ["https://www.youtube.com/*", "https://youtube.com/*"]
+      "matches": ["*://www.youtube.com/*", "*://youtube.com/*"]
     }
   ]
 

@@ -46,7 +46,10 @@ const addObserver = () => {
 window.onload = addObserver;
 
 const changeText = (menu: Element) => {
+  const title = menu.querySelector(".ytp-panel-title");
   const items = menu.querySelectorAll(".ytp-menuitem");
+
+  const isAutoPrefix = title?.textContent !== "自動翻譯";
 
   for (const item of items) {
     const elements = [
@@ -55,31 +58,35 @@ const changeText = (menu: Element) => {
     ];
 
     for (const element of elements) {
-      if (!element) continue;
+      if (!element?.textContent) continue;
 
       if (isModified(element.textContent)) return;
 
-      if (isCanBeModified(element.textContent)) {
-        element.innerHTML = addTag(element.textContent!);
+      if (isCanBeModified(isAutoPrefix, element.textContent)) {
+        element.innerHTML = addTag(element.textContent);
         return;
       }
     }
   }
 };
 
-const isModified = (text: string | null) => {
-  if (text === null) return false;
+const isModified = (text: string) => {
   return text === FIXED_TRADITIONAL || text.includes(TO + FIXED_TRADITIONAL);
 };
 
-const isCanBeModified = (text: string | null) => {
-  if (text === null) return false;
-  return text === TRADITIONAL || text.includes(TO + TRADITIONAL);
+/**
+ * @param isAutoPrefix If true, the `text` should have a ">> " prefix.
+ */
+const isCanBeModified = (isAutoPrefix: boolean, text: string) => {
+  return (
+    (text === TRADITIONAL && !isAutoPrefix) || text.includes(TO + TRADITIONAL)
+  );
 };
 
 const addTag = (text: string) => {
-  if (text === TRADITIONAL) return FIXED_TAG_TRADITIONAL;
-  return text.replace(TO + TRADITIONAL, TO + FIXED_TAG_TRADITIONAL);
+  return text === TRADITIONAL
+    ? FIXED_TAG_TRADITIONAL
+    : text.replace(TO + TRADITIONAL, TO + FIXED_TAG_TRADITIONAL);
 };
 
 console.log("[fix-yt-traditional-chinese-subtitle]: Loaded successfully");
