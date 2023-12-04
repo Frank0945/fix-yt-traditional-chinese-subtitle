@@ -29,7 +29,7 @@ XHR.open = function () {
    * Convert traditional Chinese subtitles to simplified Chinese,
    * and append new payload to conducive to the following conversion.
    */
-  if (arguments[1].indexOf(FILTER.HANT) > -1) {
+  if (arguments[1].includes(FILTER.HANT)) {
     arguments[1] =
       arguments[1].replace(FILTER.HANT, FILTER.HANS) + "&" + ORIGIN_TLANG;
   }
@@ -48,7 +48,7 @@ XHR.send = function () {
     const url = this.responseURL;
 
     // Convert simplified Chinese subtitles to traditional Chinese.
-    if (url.indexOf(FILTER.HANS) > -1 && url.indexOf(ORIGIN_TLANG) > -1) {
+    if (url.includes(FILTER.HANS) && url.includes(ORIGIN_TLANG)) {
       const converted = converter(this.responseText);
 
       Object.defineProperty(this, "responseText", {
