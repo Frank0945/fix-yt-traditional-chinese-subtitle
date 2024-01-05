@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "YouTube 繁體自動翻譯修正",
-  "description": "修正YouTube 繁體中文自動翻譯無法正確顯示的錯誤。",
+  "name": "__MSG_extName__",
+  "description": "__MSG_extDescription__",
   "version": "1.0.8",
   "icons": {
     "128": "128.png"
@@ -9,6 +9,7 @@
   "action": {
     "default_popup": "popup.html"
   },
+  "default_locale": "en",
   "content_scripts": [
     {
       "run_at": "document_start",

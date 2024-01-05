@@ -3,7 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <title>fix-yt-traditional-chinese-subtitle</title>
-    <!-- <script src="js/vendor.js"></script> -->
     <style>
       body {
         font-family: monospace, Microsoft JhengHei;
@@ -25,6 +24,7 @@
         margin: auto;
         margin-top: 22px;
         margin-bottom: 28px;
+        line-height: 1.2rem;
       }
       a {
         background: #e9e9e9;
@@ -46,6 +46,9 @@
         align-items: end;
         justify-content: space-between;
       }
+      .contactUs {
+        line-height: 1.1rem;
+      }
       .version {
         background: #3f3f3f;
         padding: 4px 10px;
@@ -56,11 +59,13 @@
   <body>
     <main>
       <img src="128.png" width="64" height="64" alt="icon" />
-      <span class="title"> Thanks for using YouTube 繁體自動翻譯修正 :) </span>
+      <span class="title"></span>
       <div class="btns">
-        <a target="_blank" href="https://www.buymeacoffee.com/yuanchuang"
-          >請開發者喝杯咖啡</a
-        >
+        <a
+          id="buymeacoffee"
+          target="_blank"
+          href="https://www.buymeacoffee.com/yuanchuang"
+        ></a>
         <a
           target="_blank"
           href="https://github.com/Frank0945/fix-yt-traditional-chinese-subtitle"
@@ -68,13 +73,14 @@
         >
       </div>
       <div class="footer">
-        <span>
-          聯絡開發者：
+        <span class="contactUs">
+          <span id="contact"></span>
           <br />
           yuanchuang940@gmail.com
         </span>
         <span class="version">v1.0.8</span>
       </div>
     </main>
+    <script src="popup.js"></script>
   </body>
 </html>
