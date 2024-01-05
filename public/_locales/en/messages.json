@@ -1,12 +1,12 @@
 {
   "extName": {
-    "message": "YouTube Traditional Chinese Automatic Translation Correction"
+    "message": "YouTube TC AutoTrans Corrector"
   },
   "extDescription": {
     "message": "Corrected the issue that prevented the proper display of YouTube's automatic translation in Traditional Chinese."
   },
   "title": {
-    "message": "Thanks for using YouTube Traditional Chinese Automatic Translation Correction :)"
+    "message": "Thanks for using YouTube TC AutoTrans Corrector :)"
   },
   "buyMeACoffee": {
     "message": "Buy developer a coffee"

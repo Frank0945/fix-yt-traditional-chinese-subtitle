@@ -1,0 +1,17 @@
+{
+  "extName": {
+    "message": "YouTube 繁体自动翻译修正"
+  },
+  "extDescription": {
+    "message": "修正YouTube 繁体中文自动翻译无法正确显示的错误。"
+  },
+  "title": {
+    "message": "Thanks for using YouTube 繁体自动翻译修正 :)"
+  },
+  "buyMeACoffee": {
+    "message": "请开发者喝杯咖啡"
+  },
+  "contactMe": {
+    "message": "联络开发者："
+  }
+}

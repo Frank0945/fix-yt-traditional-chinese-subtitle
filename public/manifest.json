@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "__MSG_extName__",
   "description": "__MSG_extDescription__",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "icons": {
     "128": "128.png"
   },
@@ -23,11 +23,4 @@
       "matches": ["*://www.youtube.com/*", "*://youtube.com/*"]
     }
   ]
-
-  // For Firefox settings
-  // "browser_specific_settings": {
-  //   "gecko": {
-  //     "id": "yuanchuang940@gmail.com"
-  //   }
-  // }
 }
