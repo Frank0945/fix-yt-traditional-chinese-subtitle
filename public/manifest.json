@@ -23,4 +23,10 @@
       "matches": ["*://www.youtube.com/*", "*://youtube.com/*"]
     }
   ]
+  // for firefox settings
+  // "browser_specific_settings": {
+  //   "gecko": {
+  //     "id": "yuanchuang940@gmail.com"
+  //   }
+  // }
 }
